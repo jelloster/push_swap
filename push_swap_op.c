@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/11 16:30:14 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/13 09:20:37 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	swap(t_stack *s)
 	
 	if (s -> top < 2)
 		return ;
-	temp = s -> arr[0];
-	s -> arr[0] = s -> arr[1];
-	s -> arr[0] = temp;
+	temp = s -> arr[s -> top];
+	s -> arr[s -> top] = s -> arr[s -> top - 1];
+	s -> arr[s -> top - 1] = temp;
 }
 
 /*
@@ -50,8 +50,10 @@ void	rotate(t_stack *s)
 {
 	int	temp;
 
+	if (s -> top <= 0)
+		return ;
 	temp = s->arr[s->top];
-	ft_memmove(&(s->arr[s->top]), &(s->arr[s->top - 1]), s->top + 1);
+	ft_memmove(&(s->arr[1]), &(s->arr[0]), s->top * sizeof(int));
 	s->arr[0] = temp;
 }
 
@@ -64,7 +66,9 @@ void	reverse_rotate(t_stack *s)
 {
 	int	temp;
 
+	if (s->top <= 0)
+		return ;
 	temp = s->arr[0];
-	ft_memmove(&(s->arr[s->top - 1]), &(s->arr[s->top]), s->top + 1);
+	ft_memmove(&(s->arr[0]), &(s->arr[1]), s->top * sizeof(int));
 	s->arr[s->top] = temp;
 }

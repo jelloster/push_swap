@@ -1,10 +1,15 @@
-FLAGS := -Wall -Wextra -Werror -g
-CC	:= cc
-SRC_FILES := av_handling.c  main.c  op_ab.c	op_a.c	op_b.c	push_swap.c  \
-			 push_swap_op.c  push_swap_utils.c
-OBJ_FILES := $(SRC_FILES:.c=.o)
-NAME := push_swap
-LIBFT := libft/libft.a
+# ----------FLAGS------------
+FLAGS		:= -Wall -Wextra -Werror
+DEBUG_FLAGS	:= -g
+SANITIZE_FLAGS	:= -g -fsanitize=address
+
+CC		:= cc
+SRC_FILES	:= av_handling.c main.c op_ab.c op_a.c		\
+		   op_b.c push_swap.c debug.c push_swap_op.c	\
+		   push_swap_utils.c stack_utils.c
+OBJ_FILES	:= $(SRC_FILES:.c=.o)
+NAME		:= push_swap
+LIBFT		:= libft/libft.a
 
 # -------------RULES--------------
 
@@ -32,3 +37,14 @@ fclean: clean
 
 .PHONY: re
 re: fclean all
+
+.PHONY: mc
+mc: all clean
+
+.PHONY: debug
+debug: FLAGS += $(DEBUG_FLAGS)
+debug: re
+
+.PHONY: sanitize
+sanitize: FLAGS += $(SANITIZE_FLAGS)
+sanitize: re

@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:36:27 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/12 16:55:27 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:59:03 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct	s_pusw
 void	push_swap(t_pusw *pusw);
 
 //		push_swap_utils.c
-void	r_or_rr(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *));
+void	n2top(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
 
 //		av_handling.c
 int		get_nums(int ac, char *av[], t_pusw *pusw);
@@ -65,5 +65,14 @@ void	rrb(t_stack *s_b);
 void	ss(t_stack *s_a, t_stack *s_b);
 void	rr(t_stack *s_a, t_stack *s_b);
 void	rrr(t_stack *s_a, t_stack *s_b);
+
+void	print_stack(t_stack *s);
+void	print_stacks(t_pusw *p);
+
+//	stack_utils.c
+int	find_num_i(t_stack s, int num);
+int	high_i(t_stack s);
+int	n_high_i(t_stack s, int h_i);
+int	low_i(t_stack s);
 
 #endif

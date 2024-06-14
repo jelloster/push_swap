@@ -27,6 +27,7 @@ int	get_nums(int ac, char *av[], t_pusw *pusw)
 		return (0);
 	pusw -> n = num_count;
 	pusw -> s_a.top = num_count - 1;
+	pusw -> s_b.top = -1; // -1 for empty?
 	nums = malloc(num_count * sizeof(int));
 	if (!nums)
 		exit(1);

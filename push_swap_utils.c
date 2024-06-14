@@ -6,34 +6,25 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:09:39 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/11 16:18:34 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:59:56 by jelloster        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	high_i(t_stack s);
-
-void	r_or_rr(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *))
+// Figure out which rotate is faster to get n on top.
+void	n2top(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n)
 {
-	if (high_i(*s) >= s -> top / 2)
-		(*r)(s);
+	int	n_i;
+	void	(*f)(t_stack *);
+
+	n_i = find_num_i(*s, n);
+	if (n_i >= s -> top / 2)
+		f = r;
 	else
-		(*rr)(s);
-}
-
-static int	high_i(t_stack s)
-{
-	int	i;
-	int	highest_i;
-	
-	i = 0;
-	highest_i = s.top;
-	while (i <= s.top)
+		f = rr;
+	while (s -> arr[s -> top] != n)
 	{
-		if (s.arr[i] > s.arr[highest_i])
-			highest_i = i;
-		i++;
+		(*f)(s);
 	}
-	return (highest_i);
 }
