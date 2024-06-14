@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/13 09:20:37 by jelloster        ###   ########.fr       */
+/*   Updated: 2024/06/14 14:10:02 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	push(t_stack *s_1, t_stack *s_2)
 }
 
 /*
-	Shift up all elements of a stack by 1.
-	The first element becomes the last one.
+   Shift up all elements of a stack by 1.
+   The first element becomes the last one.
 */
 
 void	rotate(t_stack *s)

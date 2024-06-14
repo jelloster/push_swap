@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:21:42 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/13 14:10:25 by jelloster        ###   ########.fr       */
+/*   Updated: 2024/06/14 15:28:58 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,117 @@
 #include "push_swap.h"
 
 static int	check_order(t_pusw *pusw);
-int		stupid_sort(t_stack *s, t_pusw *pusw);
+int			stupid_sort(t_stack *s, t_pusw *pusw);
+void		find_cheapest_move(t_pusw *pusw);
 
 void	push_swap(t_pusw *pusw)
 {
 	stupid_sort(&(pusw->s_a), pusw);
 }
 
+void	smart_sort(t_pusw *pusw)
+{
+	// If we have mmore than 3 numbers (change later?)
+	if (pusw->s_a.top > 2)
+	{
+		// Push 2 numbers into b to get MIN & MAX
+		pa(&(pusw->s_a),&(pusw->s_b));
+		pa(&(pusw->s_a),&(pusw->s_b));
+		maxs_n_mins(pusw);
+
+		// Loop while the list is not ordered
+		while (pusw->s_a.top > 2)
+		{
+			find_cheapest_move(pusw);
+		}
+	}
+
+
+
+	//
+}
+
+int	count_cost(t_pusw *pusw, int n)
+{
+	int	moves;
+	
+
+	moves = 0;
+	// Count rotations to top of stack A
+	moves += n2top_c(&(pusw->s_a), &ra, &rra, n);
+	// Count rotations of stack B
+	
+	// Count +1 for pushing
+	moves += 1;
+	return (moves);
+}
+
+void	find_cheapest_move(t_pusw *pusw)
+{
+	int	i;
+	int	*costs;
+
+	i = 0;
+	costs = malloc((pusw->s_a.top + 1) * sizeof(int));
+	if (!costs)
+		exit (1);
+	while (i < pusw->s_a.top)
+	{
+		costs[i] = count_cost(pusw, i);
+		i++;
+	}
+	// execute lowest cost moves
+}
+
+
+
+
+
+
+
+
+
+void	maxs_n_mins(t_pusw *pusw)
+{
+	max_n_min(&(pusw->s_a));
+	max_n_min(&(pusw->s_b));
+}
+
+void	max_n_min(t_stack *s)
+{
+	int	i;
+
+	if (s->top < 0)
+		return ;
+	i = 0;
+	s->min = s->arr[s->top];
+	s->max = s->arr[s->top];
+	s->max_i = s->top;
+	s->min_i = s->top;
+
+	while (i <= s->top)
+	{
+		if (s->arr[i] > s->max)
+		{
+			s->max = s->arr[i];
+			s->max_i = i;
+		}
+		if (s->arr[i] < s->min)
+		{
+			s->min = s->arr[i];
+			s->min_i = i;
+		}
+		i++;
+	}
+}
+
+
+
+
+
+
+
+// sort in ascending order
 int	stupid_sort(t_stack *s, t_pusw *pusw)
 {
 	int	h_i = high_i(*s);
@@ -39,7 +143,6 @@ int	stupid_sort(t_stack *s, t_pusw *pusw)
 
 	while (!check_order(pusw)) // until in order
 	{
-		// move next highest next to set highest
 		while (nh_i != h_i + 1
 			&& !(nh_i == 0 && h_i == s->top))
 		{
@@ -47,16 +150,14 @@ int	stupid_sort(t_stack *s, t_pusw *pusw)
 			sa(s);
 			h_i = find_num_i(*s, h_n);
 			nh_i = n_high_i(*s, h_i);
-			//print_stacks(pusw);
 		}
 		// move lowest to top
 		n2top(s, &ra, &rra, s->arr[low_i(*s)]);
 		h_i = find_num_i(*s, h_n);
 		nh_i = n_high_i(*s, h_i);
-
 		// set highest to next highest
 		h_i = nh_i; // set h_i to n_hi
-		h_n = s->arr[h_i];
+		h_n = nh_n;
 		nh_i = n_high_i(*s, h_i);
 		nh_n = s->arr[nh_i];
 	}
