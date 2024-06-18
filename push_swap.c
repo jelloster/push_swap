@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:21:42 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/14 15:28:58 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/18 15:08:19 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,33 @@ void	smart_sort(t_pusw *pusw)
 	//
 }
 
-int	count_cost(t_pusw *pusw, int n)
+int	count_cost(t_stack *s_a, t_stack *s_b, int n)
 {
 	int	moves;
-	
 
 	moves = 0;
 	// Count rotations to top of stack A
-	moves += n2top_c(&(pusw->s_a), &ra, &rra, n);
+	moves += n2top_c(s_a, &ra, &rra, n);
 	// Count rotations of stack B
+
+	// Count B rotats
+	// If n is new biggest
+	if (n > s_a -> max)
+		moves += n2top_c(s_b, &rb, &rrb, s_b -> max);
+	else if (n < s_b -> min)
+		return (0);
+		// moves += n2_bot_c();
+		// lowest num to bottom
+	else
+		//moves += n2top_c(s_b, &ra, &rra,
+		// next lowest on top of stack b
 	
 	// Count +1 for pushing
 	moves += 1;
 	return (moves);
 }
 
+// Count the cost of moving a num to stack b for each nuntrm
 void	find_cheapest_move(t_pusw *pusw)
 {
 	int	i;
@@ -79,7 +91,7 @@ void	find_cheapest_move(t_pusw *pusw)
 		exit (1);
 	while (i < pusw->s_a.top)
 	{
-		costs[i] = count_cost(pusw, i);
+		costs[i] = count_cost(&pusw->s_a, &pusw->s_b, i);
 		i++;
 	}
 	// execute lowest cost moves
