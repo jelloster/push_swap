@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/18 15:14:08 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:27:06 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	swap(t_stack *s)
 
 void	push(t_stack *s_1, t_stack *s_2)
 {
-	if (s_1 -> top == 0)
+	if (s_1 -> top == -1)
 		return ;
-	s_2 -> arr[s_2 -> top++] = s_2 -> arr[s_1 -> top--];
+	s_2 -> arr[++(s_2 -> top)] = s_1 -> arr[(s_1 -> top)--];
 }
 
 /*
@@ -50,7 +50,7 @@ void	rotate(t_stack *s)
 {
 	int	temp;
 
-	if (s -> top <= 0)
+	if (s -> top <= -1)
 		return ;
 	temp = s->arr[s->top];
 	ft_memmove(&(s->arr[1]), &(s->arr[0]), s->top * sizeof(int));

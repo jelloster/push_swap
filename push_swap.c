@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:21:42 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/19 15:18:44 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:51:04 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,22 @@ void	push_swap(t_pusw *pusw)
 
 void	smart_sort(t_pusw *pusw)
 {
-	// If we have mmore than 3 numbers (change later?)
 	if (pusw->s_a.top > 2)
 	{
 		// Push 2 numbers into b to get MIN & MAX
-		pa(&(pusw->s_a),&(pusw->s_b));
-		pa(&(pusw->s_a),&(pusw->s_b));
-		maxs_n_mins(pusw);
+		pb(&(pusw->s_a),&(pusw->s_b));
+		pb(&(pusw->s_a),&(pusw->s_b));
+		print_stacks(pusw);
 
 		// Loop while the list is not ordered
 		while (pusw->s_a.top > 2)
+		{
+			maxs_n_mins(pusw);
+			ft_printf("s_b max %d, s_b min %d\n", pusw->s_b.max, pusw->s_b.min);
+			ft_printf("s_a max %d, s_a min %d\n", pusw->s_a.max, pusw->s_a.min);
 			find_cheapest_move(pusw);
+			print_stacks(pusw);
+		}
 	}
 	// Order last 3 numbers
 	// bla bla bla
@@ -56,6 +61,7 @@ void	smart_sort(t_pusw *pusw)
 	// Move Stack B to stack 
 	while (pusw -> s_b.top >= 0)
 		pa(&pusw->s_a, &pusw->s_b);
+	print_stacks(pusw);
 }
 
 // Count the cost of moving a num to stack b for each nuntrm
@@ -72,7 +78,7 @@ void	find_cheapest_move(t_pusw *pusw)
 		exit (1);
 	while (i < pusw->s_a.top)
 	{
-		costs[i] = count_cost(&pusw->s_a, &pusw->s_b, i);
+		costs[i] = count_cost(&pusw->s_a, &pusw->s_b, pusw->s_a.arr[i]);
 		if (i > 0 && costs[i] < costs[low_cost_i])
 			low_cost_i = i;
 		i++;
@@ -87,13 +93,13 @@ static int	count_cost(t_stack *s_a, t_stack *s_b, int n)
 
 	moves = 0;
 	// Count A rotates
-	moves += n2top_c(s_a, &ra, &rra, n);
+	moves += n2top_c(s_a, &rotate, &reverse_rotate, n);
 
 	// Count B rotates
 	if (n > s_a -> max)
 		moves += n2top_c(s_b, &rotate, &reverse_rotate, s_b -> max);
 	else if (n < s_b -> min)
-		moves += n2bot_c(s_b, &rotate, &reverse_rotate, s_b -> max);
+		moves += n2bot_c(s_b, &rotate, &reverse_rotate, s_b -> min);
 	else
 	{
 		temp = s_b -> arr[n_low_i(*s_b, low_i(*s_b))];
@@ -111,13 +117,23 @@ static void	exe_cheapest_move(t_stack *s_a, t_stack *s_b, int n)
 
 	// rotate B
 	if (n > s_a -> max)
-		n2top(s_b, &rotate, &reverse_rotate, s_b -> max);
+	{
+		n2top(s_b, &rb, &rrb, s_b -> max);
+		ft_printf("%d is the new max.\n", n);
+		ft_printf("Moving old max (%d) to top.\n", s_b -> max);
+	}
 	else if (n < s_b -> min)
-		n2bot(s_b, &rotate, &reverse_rotate, s_b -> max);
+	{
+		n2bot(s_b, &rb, &rrb, s_b -> min);
+		ft_printf("%d is the new min.\n", n);
+		ft_printf("Moving old min (%d) to bottom.\n", s_b -> min);
+	}
 	else
 	{
-		temp = s_b -> arr[n_low_i(*s_b, low_i(*s_b))];
+		temp = s_b -> arr[n_low_i(*s_b, n)];
 		n2top(s_b, &rotate, &reverse_rotate, temp);
+		ft_printf("%d is not the new min or max.\n", n);
+		ft_printf("Moving next lowest num (%d) to the top.\n", temp);
 	}
 	// Push from A to B
 	pb(s_a, s_b);

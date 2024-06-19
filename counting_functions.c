@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:11:10 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/19 13:36:55 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:49:51 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 int	n2top_c(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n)
 {
+//	ft_printf("\n n in n2top = %d\n", n);
 	t_stack	t_s;
-	int		n_i;
 	void	(*f)(t_stack *);
 	int		count;
 
 	count = 0;
 	t_s = *s;
-	n_i = find_num_i(t_s, n);
-	if (n_i >= s -> top / 2)
+	if (find_num_i(t_s, n) >= s -> top / 2)
 		f = r;
 	else
 		f = rr;
-	while (s -> arr[s -> top] != n)
+	while (t_s.arr[t_s.top] != n) // infinite loop
 	{
-		(*f)(s);
+//		ft_printf("Should be %d is %d\n", n, t_s.arr[t_s.top]);
+		(*f)(&t_s);
 		count++;
 	}
 	return (count);
@@ -37,20 +37,18 @@ int	n2top_c(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n)
 int	n2bot_c(t_stack *s, void(*r)(t_stack *), void (*rr)(t_stack *), int n)
 {
 	t_stack	t_s;
-	int		n_i;
 	void	(*f)(t_stack *);
 	int		count;
 
 	count = 0;
 	t_s = *s;
-	n_i = find_num_i(t_s, n);
-	if (n_i <= s -> top / 2)
+	if (find_num_i(t_s, n) <= s -> top / 2)
 		f = rr;
 	else
 		f = r;
-	while (s -> arr[0] != n)
+	while (t_s.arr[0] != n)
 	{
-		(*f)(s);
+		(*f)(&t_s);
 		count++;
 	}
 	return (count);
