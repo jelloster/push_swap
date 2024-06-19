@@ -70,3 +70,26 @@ int	low_i(t_stack s)
 	}
 	return (lowest_i);
 }
+
+int	n_low_i(t_stack s, int l_i)
+{
+	int	i;
+	int	nl_i;
+	
+	i = 0;
+	if (l_i != s.top)
+		nl_i = s.top;
+	else
+		nl_i = 0;
+	while (i <= s.top)
+	{
+		if (i != l_i)
+		{
+			if (s.arr[i] >= s.arr[l_i]
+				&& s.arr[i] < s.arr[nl_i])
+				nl_i = i;
+		}
+		i++;
+	}
+	return (nl_i);
+}

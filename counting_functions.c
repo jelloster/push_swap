@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 15:11:10 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/18 15:14:08 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/19 13:36:55 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	n2top_c(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n)
 	}
 	return (count);
 }
-// are these two the same or ??? shouldnt be
+
 int	n2bot_c(t_stack *s, void(*r)(t_stack *), void (*rr)(t_stack *), int n)
 {
 	t_stack	t_s;
@@ -48,7 +48,7 @@ int	n2bot_c(t_stack *s, void(*r)(t_stack *), void (*rr)(t_stack *), int n)
 		f = rr;
 	else
 		f = r;
-	while (s -> arr[s -> top] != n)
+	while (s -> arr[0] != n)
 	{
 		(*f)(s);
 		count++;

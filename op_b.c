@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:21:10 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/12 16:57:27 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:00:48 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	sb(t_stack *s_b)
 	ft_printf("sb\n");
 }
 
-void	pab(t_stack *s_a, t_stack *s_b)
+void	pb(t_stack *s_a, t_stack *s_b)
 {
 	push(s_a, s_b);
 	ft_printf("pb\n");

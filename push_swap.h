@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:36:27 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/14 14:47:49 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/06/19 15:18:46 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	push_swap(t_pusw *pusw);
 
 //		push_swap_utils.c
 void	n2top(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
+void	n2bot(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
 
 //		av_handling.c
 int		get_nums(int ac, char *av[], t_pusw *pusw);
@@ -52,10 +53,11 @@ int		find_num_i(t_stack s, int num);
 int		high_i(t_stack s);
 int		n_high_i(t_stack s, int h_i);
 int		low_i(t_stack s);
-
+int		n_low_i(t_stack s, int l_i);
 
 //		counting_functions.c
 int		n2top_c(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
+int		n2bot_c(t_stack *s, void(*r)(t_stack *), void (*rr)(t_stack *), int n);
 
 void	max_n_min(t_stack *s);
 void	maxs_n_mins(t_pusw *pusw);
