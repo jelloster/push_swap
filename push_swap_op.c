@@ -38,7 +38,10 @@ void	push(t_stack *s_1, t_stack *s_2)
 {
 	if (s_1 -> top == -1)
 		return ;
-	s_2 -> arr[++(s_2 -> top)] = s_1 -> arr[(s_1 -> top)--];
+	//s_2 -> arr[++(s_2 -> top)] = s_1 -> arr[(s_1 -> top)--]; // bad ?
+	(s_2 -> top)++;
+	s_2 -> arr[s_2 -> top] = s_1 -> arr[s_1 -> top]; // null pointer ?
+	(s_1 -> top)--;
 }
 
 /*

@@ -53,7 +53,7 @@ int		find_num_i(t_stack s, int num);
 int		high_i(t_stack s);
 int		n_high_i(t_stack s, int h_i);
 int		low_i(t_stack s);
-int		n_low_i(t_stack s, int l_i);
+int		n_low_i(t_stack s, int n);
 
 //		counting_functions.c
 int		n2top_c(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
@@ -88,5 +88,11 @@ void	rrb(t_stack *s_b);
 void	ss(t_stack *s_a, t_stack *s_b);
 void	rr(t_stack *s_a, t_stack *s_b);
 void	rrr(t_stack *s_a, t_stack *s_b);
+
+//	rotation_execution.c
+void	d_rot(t_stack *s_a, t_stack *s_b, int n);
+void	d_rev_rot(t_stack *s_a, t_stack *s_b, int n);
+void	ra_rrb(t_stack *s_a, t_stack *s_b, int n);
+void	rra_rb(t_stack *s_a, t_stack *s_b, int n);
 
 #endif

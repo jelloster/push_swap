@@ -23,5 +23,7 @@ int	main(int ac, char *av[])
 	}
 	get_nums(ac, av, &pusw);
 	push_swap(&pusw);
+	free(pusw.s_a.arr);
+	free(pusw.s_b.arr);
 	return (0);
 }

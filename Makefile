@@ -6,7 +6,8 @@ SANITIZE_FLAGS	:= -g -fsanitize=address
 CC		:= cc
 SRC_FILES	:= av_handling.c main.c op_ab.c op_a.c		\
 		   op_b.c push_swap.c debug.c push_swap_op.c	\
-		   push_swap_utils.c stack_utils.c
+		   push_swap_utils.c stack_utils.c counting_functions.c rotation_counters.c memory_utils.c \
+		   more_utils.c rotation_execution.c
 OBJ_FILES	:= $(SRC_FILES:.c=.o)
 NAME		:= push_swap
 LIBFT		:= libft/libft.a

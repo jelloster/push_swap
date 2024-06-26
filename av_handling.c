@@ -19,7 +19,8 @@ static int	get_array(int ac, char *av[], int *arr);
 
 int	get_nums(int ac, char *av[], t_pusw *pusw)
 {
-	int	*nums;
+	int	*nums_a;
+	int	*nums_b;
 	int	num_count;
 
 	num_count = count_nums(ac, av);
@@ -28,15 +29,23 @@ int	get_nums(int ac, char *av[], t_pusw *pusw)
 	pusw -> n = num_count;
 	pusw -> s_a.top = num_count - 1;
 	pusw -> s_b.top = -1;
-	nums = malloc(num_count * sizeof(int));
-	if (!nums)
+	nums_a = malloc(num_count * sizeof(int)); // Malloc 1
+	if (!nums_a)
 		exit(1);
-	if (!get_array(ac, av, nums))
+	nums_b = malloc(num_count * sizeof(int)); // Malloc 2
+	if (!nums_b)
 	{
-		free (nums);
+		free(nums_a);
+		exit(1);
+	}
+	if (!get_array(ac, av, nums_a))
+	{
+		free (nums_a);
+		free (nums_b);
 		exit (1);
 	}
-	pusw -> s_a.arr = nums;
+	pusw -> s_a.arr = nums_a;
+	pusw -> s_b.arr = nums_b;
 	return (1);
 }
 
