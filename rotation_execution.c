@@ -64,19 +64,19 @@ static void	get_b_info(t_stack s_b, int *b_n, int *b_dest, int n_a)
 {
 	if (n_a > s_b.max)
 	{
-		ft_printf("\n%d is new max\n", n_a);
+//		ft_printf("\n%d is new max\n", n_a);
 		*b_n = s_b.max;
 		*b_dest = s_b.top;
 	}
 	else if (n_a < s_b.min)
 	{
-		ft_printf("\n%d is new min\n", n_a);
+//		ft_printf("\n%d is new min\n", n_a);
 		*b_n = s_b.min;
 		*b_dest = 0;
 	}
 	else
 	{
-		ft_printf("\n%d is new nothing\n", n_a);
+//		ft_printf("\n%d is new nothing\n", n_a);
 		*b_n = s_b.arr[n_low_i(s_b, n_a)];
 		*b_dest = s_b.top;
 	}

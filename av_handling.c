@@ -19,6 +19,9 @@ static int	get_array(int ac, char *av[], int *arr);
 
 int	get_nums(int ac, char *av[], t_pusw *pusw)
 {
+	// First argument should be at the top of the stack!!!
+	// No duplicates allowed!!
+	// Must display "Error\n" if a non integer or bigger than int is given
 	int	*nums_a;
 	int	*nums_b;
 	int	num_count;
@@ -42,7 +45,7 @@ int	get_nums(int ac, char *av[], t_pusw *pusw)
 	{
 		free (nums_a);
 		free (nums_b);
-		exit (1);
+		return (0);
 	}
 	pusw -> s_a.arr = nums_a;
 	pusw -> s_b.arr = nums_b;
@@ -61,7 +64,12 @@ static int	get_array(int ac, char *av[], int *arr)
 	while (av_i <= ac - 1)
 	{
 		if (!ft_strchr(av[av_i], ' '))
+		{
 			arr[arr_i++] = ft_atoi(av[av_i++]);
+			if ((arr[arr_i - 1] == 0 || arr[arr_i -1] == -1)
+				&& ft_strlen(av[av_i - 1]) > 2)
+				return (0);
+		}
 		else
 		{
 			temp = ft_split(av[av_i++], ' ');
@@ -118,6 +126,7 @@ static int	check_nested_nums(char	*str, int *count)
 		else
 		{
 			free(temp);
+			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
 		i++;

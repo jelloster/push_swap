@@ -55,9 +55,21 @@ int		n_high_i(t_stack s, int h_i);
 int		low_i(t_stack s);
 int		n_low_i(t_stack s, int n);
 
-//		counting_functions.c
-int		n2top_c(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
-int		n2bot_c(t_stack *s, void(*r)(t_stack *), void (*rr)(t_stack *), int n);
+//	rotation_execution.c
+void	d_rot(t_stack *s_a, t_stack *s_b, int n);
+void	d_rev_rot(t_stack *s_a, t_stack *s_b, int n);
+void	ra_rrb(t_stack *s_a, t_stack *s_b, int n);
+void	rra_rb(t_stack *s_a, t_stack *s_b, int n);
+
+//	rotation_counting.c
+int	rra_rb_c(t_stack s_a, t_stack s_b, int n);
+int	ra_rrb_c(t_stack s_a, t_stack s_b, int n);
+int	d_rot_c(t_stack s_a, t_stack s_b, int n, int (*f)(t_stack, int, int));
+int	rr_move(t_stack s, int start_i, int end_i);
+int	r_move(t_stack s, int start_i, int end_i);
+
+//	memory_utils.c
+void free_n_exit(t_pusw pusw);
 
 void	max_n_min(t_stack *s);
 void	maxs_n_mins(t_pusw *pusw);
@@ -88,11 +100,5 @@ void	rrb(t_stack *s_b);
 void	ss(t_stack *s_a, t_stack *s_b);
 void	rr(t_stack *s_a, t_stack *s_b);
 void	rrr(t_stack *s_a, t_stack *s_b);
-
-//	rotation_execution.c
-void	d_rot(t_stack *s_a, t_stack *s_b, int n);
-void	d_rev_rot(t_stack *s_a, t_stack *s_b, int n);
-void	ra_rrb(t_stack *s_a, t_stack *s_b, int n);
-void	rra_rb(t_stack *s_a, t_stack *s_b, int n);
 
 #endif
