@@ -1,152 +1,109 @@
 #include "push_swap.h"
 
-static void	move_cheapest_num(t_pusw *pusw, int n, int cost);
-static void	a_to_b(t_pusw *pusw);
-static int	count_cheapest_cost(t_stack s_a, t_stack s_b, int n);
-static int	check_order(t_pusw *pusw);
-static int is_in_array(int num, int *arr, int size);
+static void	cheapest_push(t_stack *s_f, t_stack *s_t);
+static int	cheapest_cost(t_stack s_f, t_stack s_t, int n);
+static void	exe_cheapest_push(t_stack *s_f, t_stack *s_t, int n, int cost);
+static int	check_order(t_stack s_a);
 
-void	push_swap(t_pusw *pusw)
+void	push_swap(t_stack *s_a, t_stack *s_b)
 {
-	if (check_order(pusw))
+	if (check_order(*s_a))
 		return ;
-	if (pusw->s_a.top > 2)
+	if (s_a -> top > 2)
 	{
-		pb(&(pusw->s_a),&(pusw->s_b)); // doesnt care about big 3
-		pb(&(pusw->s_a),&(pusw->s_b));
-		maxs_n_mins(pusw);
-		while (pusw -> s_a.top > 2)
-			a_to_b(pusw);
-		n2top(&pusw->s_b, &rb, &rrb,  pusw->s_b.max);
+		push(s_a, s_b);
+		push(s_a, s_b);
+		while (s_a -> top > 2)
+			cheapest_push(s_a, s_b);
+		n2top(s_b, s_b->max);
 	}
-	else
+	while(!check_order(*s_a) && s_a -> top > 0)
 	{
-		max_n_min(&pusw->s_a);
-		n2top(&pusw->s_a, &ra, &rra,  pusw->s_a.min);
+		rotate(s_a, 1);
+		if (s_a -> arr[s_a -> top] > s_a -> arr[s_a -> top - 1])
+			swap(s_a);
+		n2top(s_a, s_a -> min);
 	}
-	while(!check_order(pusw) && pusw->s_a.top > 0)
-	{
-		ra(&pusw->s_a);
-		if (pusw->s_a.arr[pusw->s_a.top] > pusw->s_a.arr[pusw->s_a.top-1])
-			sa(&pusw->s_a);
-		n2top(&pusw->s_a, &ra, &rra,  pusw->s_a.min);
-		print_stacks(pusw);
-	}
-	while (pusw -> s_b.top >= 0)
-		pa(&pusw->s_a, &pusw->s_b);
+	while (s_b -> top >= 0)
+		cheapest_push(s_b, s_a);
+	n2top(s_a, s_a->min);
 }
 
-void	get_big_three(int *arr, int big[], int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 3)
-	{
-		big[i] = arr[i];
-		i++;
-	}
-	while (i < size)
-	{
-		j = 0;
-		while (j < 3)
-		{
-			if (arr[i] > big[j])
-				big[j] = arr[i];
-			j++;
-		}
-		i++;
-	}
-}
-
-static void	a_to_b(t_pusw *pusw)
-{
-	int	*costs;
-	int	cheapest_num_i;
-	int	cheapest_cost;
-	int	i;
-	int	big_three[3];
-
-	get_big_three(pusw->s_a.arr, big_three, pusw->n);
-	costs = malloc((pusw -> s_a.top + 1) * sizeof(int));
-	if (!costs)
-		free_n_exit(*pusw);
-	cheapest_num_i = 0;
-	cheapest_cost = 0;
-	i = 0;
-	while (i <= pusw -> s_a.top)
-	{
-		costs[i] = count_cheapest_cost(pusw -> s_a, pusw -> s_b, pusw -> s_a.arr[i]);
-		if (i > 0 && costs[i] < costs[cheapest_num_i]
-			&& !is_in_array(pusw->s_a.arr[i], big_three, 3))
-		{
-			cheapest_num_i = i;
-			cheapest_cost = costs[i];
-		}
-		i++;
-	}
-	free (costs);
-	move_cheapest_num(pusw, pusw -> s_a.arr[cheapest_num_i], cheapest_cost);
-}
-
-static int is_in_array(int num, int *arr, int size)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (arr[i] == num)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int	count_cheapest_cost(t_stack s_a, t_stack s_b, int n)
-{
-	int	cheapest_move;
-	int	temp;
-
-	cheapest_move = d_rot_c(s_a, s_b, n, &r_move);
-	temp = d_rot_c(s_a, s_b, n, &rr_move);
-	if (temp < cheapest_move)
-		cheapest_move = temp;
-	temp = ra_rrb_c(s_a, s_b, n);
-	if (temp < cheapest_move)
-		cheapest_move = temp;
-	temp = rra_rb_c(s_a, s_b, n);
-	if (temp < cheapest_move)
-		cheapest_move = temp;
-	return (cheapest_move);
-}
-
-static void	move_cheapest_num(t_pusw *pusw, int n, int cost)
-{
-	if (d_rot_c(pusw->s_a, pusw->s_b, n, &r_move) == cost)
-		d_rot(&pusw->s_a, &pusw->s_b, n);
-	else if (d_rot_c(pusw->s_a, pusw->s_b, n, &rr_move) == cost)
-		d_rev_rot(&pusw->s_a, &pusw->s_b, n);
-	else if (ra_rrb_c(pusw->s_a, pusw->s_b, n) == cost)
-		ra_rrb(&pusw->s_a, &pusw->s_b, n);
-	else
-		rra_rb(&pusw->s_a, &pusw->s_b, n);
-	maxs_n_mins(pusw);
-}
-
-static int	check_order(t_pusw *pusw)
+static int	check_order(t_stack s_a)
 {
 	int	i;
 
-	//if (pusw->s_a.top != pusw -> n-1)
-	//	return 0;
 	i = 0;
-	while (i <= pusw -> s_a.top - 1)
+	while (i <= s_a.top - 1)
 	{
-		if (pusw -> s_a.arr[i] < pusw -> s_a.arr[i + 1])
+		if (s_a.arr[i] < s_a.arr[i + 1])
 			return (0);
 		i++;
 	}
 	return (1);
+}
+
+static void	cheapest_push(t_stack *s_f, t_stack *s_t)
+{
+	int	*costs;
+	int	c_i;
+	int	c_c;
+	int	i;
+
+	costs = malloc((s_f -> top + 1) * sizeof(int));
+	if (!costs)
+	{
+		free(s_f->arr);
+		free(s_t->arr);
+		exit(1);
+	}
+	i = 0;
+	c_i = 0;
+	c_c = cheapest_cost(*s_f, *s_t, s_f -> arr[i]);
+	while (i < s_f -> top)
+	{
+		costs[i] = cheapest_cost(*s_f, *s_t, s_f -> arr[i]);
+		if (i > 0 && costs[i] < costs[c_i])
+		{
+			c_i = i;
+			c_c = costs[i];
+		}
+		i++;
+	}
+	free(costs);
+	exe_cheapest_push(s_f, s_t, s_f -> arr[c_i], c_c);
+}
+
+static int	cheapest_cost(t_stack s_f, t_stack s_t, int n)
+{
+	int	c;
+	int	costs[4];
+	int	i;
+
+	costs[0] = d_rot_c(s_f, s_t, n, &r_move);
+	costs[1] = d_rot_c(s_f, s_t, n, &rr_move);
+	costs [2] = rf_rrt_c(s_f, s_t, n);
+	costs [3] = rrf_rt_c(s_f, s_t, n);
+
+	c = costs[0];
+	i = 0;
+	while (i < 4)
+	{
+		if (costs[i] < c)
+			c = costs[i];
+		i++;
+	}
+	return (c);
+}
+
+static void exe_cheapest_push(t_stack *s_f, t_stack *s_t, int n, int cost)
+{
+	if (d_rot_c(*s_f, *s_t, n, &r_move) == cost)
+		d_rot(s_f, s_t, n);
+	else if (d_rot_c(*s_f, *s_t, n, &rr_move) == cost)
+		d_rev_rot(s_f, s_t, n);
+	else if (rf_rrt_c(*s_f, *s_t, n) == cost)
+		rf_rrt(s_f, s_t, n);
+	else
+		rrf_rt(s_f, s_t, n);
 }

@@ -26,6 +26,11 @@ void	swap(t_stack *s)
 	temp = s -> arr[s -> top];
 	s -> arr[s -> top] = s -> arr[s -> top - 1];
 	s -> arr[s -> top - 1] = temp;
+	if (s -> code == A)
+		ft_printf("sa\n");
+	else
+		ft_printf("sb\n");
+	max_n_min(s);
 }
 
 /*
@@ -34,6 +39,8 @@ void	swap(t_stack *s)
 	Do nothing if 1 is empty	
 */
 
+// pa = push(s_b, s_a);
+// pb = push(s_a, s_b);
 void	push(t_stack *s_1, t_stack *s_2)
 {
 	if (s_1 -> top == -1)
@@ -42,6 +49,12 @@ void	push(t_stack *s_1, t_stack *s_2)
 	(s_2 -> top)++;
 	s_2 -> arr[s_2 -> top] = s_1 -> arr[s_1 -> top]; // null pointer ?
 	(s_1 -> top)--;
+	if (s_2 -> code == A)
+		ft_printf("pa\n");
+	else
+		ft_printf("pb\n");
+	max_n_min(s_1);
+	max_n_min(s_2);
 }
 
 /*
@@ -49,7 +62,7 @@ void	push(t_stack *s_1, t_stack *s_2)
    The first element becomes the last one.
 */
 
-void	rotate(t_stack *s)
+void	rotate(t_stack *s, int print)
 {
 	int	temp;
 
@@ -58,6 +71,14 @@ void	rotate(t_stack *s)
 	temp = s->arr[s->top];
 	ft_memmove(&(s->arr[1]), &(s->arr[0]), s->top * sizeof(int));
 	s->arr[0] = temp;
+	if (print)
+	{
+		if (s -> code == A)
+			ft_printf("ra\n");
+		else
+			ft_printf("rb\n");
+	}
+	max_n_min(s);
 }
 
 /*
@@ -65,7 +86,7 @@ void	rotate(t_stack *s)
 	The last element becomes the first one.
 */
 
-void	reverse_rotate(t_stack *s)
+void	reverse_rotate(t_stack *s, int print)
 {
 	int	temp;
 
@@ -74,4 +95,26 @@ void	reverse_rotate(t_stack *s)
 	temp = s->arr[0];
 	ft_memmove(&(s->arr[0]), &(s->arr[1]), s->top * sizeof(int));
 	s->arr[s->top] = temp;
+	if (print)
+	{
+		if (s -> code == A)
+			ft_printf("rra\n");
+		else
+			ft_printf("rrb\n");
+	}
+	max_n_min(s);
+}
+
+void	rr(t_stack *s_a, t_stack *s_b)
+{
+	rotate(s_a, 0);
+	rotate(s_b, 0);
+	ft_printf("rr\n");
+}
+
+void	rrr(t_stack *s_a, t_stack *s_b)
+{
+	reverse_rotate(s_a, 0);
+	reverse_rotate(s_b, 0);
+	ft_printf("rrr\n");
 }

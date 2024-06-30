@@ -1,104 +1,77 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/10 12:36:27 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/19 15:18:46 by motuomin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+
+// --- INCLUDES ---
 
 # include "libft/inc/libft.h"
 # include <stdlib.h>
 
 // --- TYPEDEFS ---
 
+typedef enum	s_code
+{
+	A,
+	B
+}		t_code;
+
 typedef struct	s_stack
 {
 	int	top;
 	int	*arr;
 	int	max;
-	int	max_i;
+	int	max_i; // used?
 	int	min;
-	int	min_i;
-}				t_stack;
+	int	min_i; // used?
+	t_code	code;
+}		t_stack;
 
 typedef struct	s_pusw
 {
 	t_stack s_a;
 	t_stack	s_b;
 	int		n;
-}				t_pusw;
+}		t_pusw;
 
+// --- FUNCTION PROTOTYPES ---
 
-// --- FUNCTON PROTOTYPES ---
+//	push_swap.c
+void	push_swap(t_stack *s_a, t_stack *s_b);
 
-//		push_swap.c
-void	push_swap(t_pusw *pusw);
-
-//		push_swap_utils.c
-void	n2top(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
-void	n2bot(t_stack *s, void (*r)(t_stack *), void (*rr)(t_stack *), int n);
-
-//		av_handling.c
-int		get_nums(int ac, char *av[], t_pusw *pusw);
-
-//		stack_utils.c
-int		find_num_i(t_stack s, int num);
-int		high_i(t_stack s);
-int		n_high_i(t_stack s, int h_i);
-int		low_i(t_stack s);
-int		n_low_i(t_stack s, int n);
-
-//	rotation_execution.c
-void	d_rot(t_stack *s_a, t_stack *s_b, int n);
-void	d_rev_rot(t_stack *s_a, t_stack *s_b, int n);
-void	ra_rrb(t_stack *s_a, t_stack *s_b, int n);
-void	rra_rb(t_stack *s_a, t_stack *s_b, int n);
-
-//	rotation_counting.c
-int	rra_rb_c(t_stack s_a, t_stack s_b, int n);
-int	ra_rrb_c(t_stack s_a, t_stack s_b, int n);
-int	d_rot_c(t_stack s_a, t_stack s_b, int n, int (*f)(t_stack, int, int));
-int	rr_move(t_stack s, int start_i, int end_i);
-int	r_move(t_stack s, int start_i, int end_i);
-
-//	memory_utils.c
-void free_n_exit(t_pusw pusw);
-
-void	max_n_min(t_stack *s);
-void	maxs_n_mins(t_pusw *pusw);
-void	print_stack(t_stack *s);
-void	print_stacks(t_pusw *p);
-
-// --- OPERATIONS ---
-
-//		push_swap_op.c
+//	push_swap_op.c
 void	swap(t_stack *s);
-void	push(t_stack *s_a, t_stack *s_b);
-void	rotate(t_stack *s);
-void	reverse_rotate(t_stack *s);
+void	push(t_stack *s_1, t_stack *s_2);
+void	rotate(t_stack *s, int print);
+void	reverse_rotate(t_stack *s, int print);
 
-//		op_a.c
-void	sa(t_stack *s_a);
-void	pa(t_stack *s_b, t_stack *s_a);
-void	ra(t_stack *s_a);
-void	rra(t_stack *s_a);
-
-//		op_b.c
-void	sb(t_stack *s_b);
-void	pb(t_stack *s_a, t_stack *s_b);
-void	rb(t_stack *s_b);
-void	rrb(t_stack *s_b);
-
-//		op_ab.c
-void	ss(t_stack *s_a, t_stack *s_b);
 void	rr(t_stack *s_a, t_stack *s_b);
 void	rrr(t_stack *s_a, t_stack *s_b);
+
+//	rotation_counters.c
+int	d_rot_c(t_stack s_f, t_stack s_t, int n, int (*f)(t_stack, int, int));
+int	rf_rrt_c(t_stack s_f, t_stack s_t, int n);
+int	rrf_rt_c(t_stack s_f, t_stack s_t, int n);
+int	r_move(t_stack s, int start_i, int end_i);
+int	rr_move(t_stack s, int start_i, int end_i);
+
+//	rotation_execution.c
+void	d_rot(t_stack *s_f, t_stack *s_t, int n);
+void	d_rev_rot(t_stack *s_f, t_stack *s_t, int n);
+void	rf_rrt(t_stack *s_f, t_stack *s_t, int n);
+void	rrf_rt(t_stack *s_f, t_stack *s_t, int n);
+
+//	index_functions.c
+int	indx(t_stack s, int n);
+int	nh_indx(t_stack s, int n);
+int	nl_indx(t_stack s, int n);
+
+//	av_handling.c
+int	get_nums(int ac, char *av[], t_pusw *pusw);
+
+//	stack_utils.c;
+void	max_n_min(t_stack *s);
+void	n2top(t_stack *s, int n);
+
+void	print_stacks(t_pusw *p);
+void	print_stack(t_stack *s);
 
 #endif

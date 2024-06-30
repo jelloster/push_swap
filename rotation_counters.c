@@ -1,4 +1,4 @@
-#include "push_swap.h"
+# include "push_swap.h"
 
 int	r_move(t_stack s, int start_i, int end_i)
 {
@@ -14,49 +14,49 @@ int	rr_move(t_stack s, int start_i, int end_i)
 	return (start_i + (s.top - end_i + 1));
 }
 
-int	d_rot_c(t_stack s_a, t_stack s_b, int n, int (*f)(t_stack, int, int))
+int	d_rot_c(t_stack s_f, t_stack s_t, int n, int (*fu)(t_stack, int, int))
 {
-	int	a;
-	int	b;
+	int	f;
+	int	t;
 
-	a = (*f)(s_a, find_num_i(s_a, n), s_a.top);
-	if (n > s_b.max)
-		b = (*f)(s_b, s_b.max_i, s_b.top);
-	else if (n < s_b.min)
-		b = (*f)(s_b, s_b.min_i, 0);
+	f = (*fu)(s_f, indx(s_f, n), s_f.top);
+	if (n > s_t.max)
+		t = (*fu)(s_t, s_t.max_i, s_t.top);
+	else if (n < s_t.min)
+		t = (*fu)(s_t, s_t.min_i, 0);
 	else
-		b = (*f)(s_b, n_low_i(s_b, n), s_b.top);
-	if (a > b)
-		return (a);
-	return (b);
+		t = (*fu)(s_t, nl_indx(s_t, n), s_t.top);
+	if (f > t)
+		return (f);
+	return (t);
 }
 
-int	ra_rrb_c(t_stack s_a, t_stack s_b, int n)
+int	rf_rrt_c(t_stack s_f, t_stack s_t, int n)
 {
-	int	a;
-	int	b;
+	int	f;
+	int	t;
 
-	a = r_move(s_a, find_num_i(s_a, n), s_a.top);
-	if (n > s_b.max)
-		b = rr_move(s_b, s_b.max_i, s_b.top);
-	else if (n < s_b.min)
-		b = rr_move(s_b, s_b.min_i, 0);
+	f = r_move(s_f, indx(s_f, n), s_f.top);
+	if (n > s_t.max)
+		t = rr_move(s_t, s_t.max_i, s_t.top);
+	else if (n < s_t.min)
+		t = rr_move(s_t, s_t.min_i, 0);
 	else
-		b = rr_move(s_b, n_low_i(s_b, n), s_b.top);
-	return (a + b);
+		t = rr_move(s_t, nl_indx(s_t, n), s_t.top); // nl_indx
+	return (f + t);
 }
 
-int	rra_rb_c(t_stack s_a, t_stack s_b, int n)
+int	rrf_rt_c(t_stack s_f, t_stack s_t, int n)
 {
-	int	a;
-	int	b;
+	int	f;
+	int	t;
 
-	a = rr_move(s_a, find_num_i(s_a, n), s_a.top);
-	if (n > s_b.max)
-		b = r_move(s_b, s_b.max_i, s_b.top);
-	else if (n < s_b.min)
-		b = r_move(s_b, s_b.min_i, 0);
+	f = rr_move(s_f, indx(s_f, n), s_f.top);
+	if (n > s_t.max)
+		t = r_move(s_t, s_t.max_i, s_t.top);
+	else if (n < s_t.min)
+		t = r_move(s_t, s_t.min_i, 0);
 	else
-		b = r_move(s_b, n_low_i(s_b, n), s_b.top);
-	return (a + b);
+		t = r_move(s_t, nl_indx(s_t, n), s_t.top); // nl_indx
+	return (f + t);
 }

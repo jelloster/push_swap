@@ -1,83 +1,84 @@
 #include "push_swap.h"
 
-static void	get_b_info(t_stack s_b, int *b_n, int *b_dest, int n_a);
+static void	get_to_info(t_stack s_to, int *to_n, int *to_dest, int n_from);
 
-void	d_rot(t_stack *s_a, t_stack *s_b, int n)
+void	d_rot(t_stack *s_f, t_stack *s_t, int n)
 {
-	int	b_n;
-	int	b_dest;
+	int	t_n;
+	int	t_i;
 
-	get_b_info(*s_b, &b_n, &b_dest, n);
-	while (find_num_i(*s_b, b_n) != b_dest
-		&& find_num_i(*s_a, n) != s_a->top)
-		rr(s_a, s_b);
-	while (find_num_i(*s_b, b_n) != b_dest)
-		rb(s_b);
-	while (find_num_i(*s_a, n) != s_a->top)
-		ra(s_a);
-	pb(s_a, s_b);
+	get_to_info(*s_t, &t_n, &t_i, n);
+	while (indx(*s_t, t_n) != t_i && indx(*s_f, n) != s_f -> top)
+		rr(s_f, s_t);
+	while (indx(*s_f, n) != s_f -> top)
+		rotate(s_f, 1);
+	while (indx(*s_t, t_n) != t_i)
+		rotate(s_t, 1);
+	push(s_f, s_t);
 }
 
-void	d_rev_rot(t_stack *s_a, t_stack *s_b, int n)
+void	d_rev_rot(t_stack *s_f, t_stack *s_t, int n)
 {
-	int	b_n;
-	int	b_dest;
+	int	t_n;
+	int	t_i;
 
-	get_b_info(*s_b, &b_n, &b_dest, n);
-	while (find_num_i(*s_b, b_n) != b_dest
-		&& find_num_i(*s_a, n) != s_a->top)
-		rrr(s_a, s_b);
-	while (find_num_i(*s_b, b_n) != b_dest)
-		rrb(s_b);
-	while (find_num_i(*s_a, n) != s_a->top)
-		rra(s_a);
-	pb(s_a, s_b);
+	get_to_info(*s_t, &t_n, &t_i, n);
+	while (indx(*s_t, t_n) != t_i && indx(*s_f, n) != s_f -> top)
+		rrr(s_f, s_t);
+	while (indx(*s_f, n) != s_f -> top)
+		reverse_rotate(s_f, 1);
+	while (indx(*s_t, t_n) != t_i)
+		reverse_rotate(s_t, 1);
+	push(s_f, s_t);
 }
 
-void	ra_rrb(t_stack *s_a, t_stack *s_b, int n)
+void	rf_rrt(t_stack *s_f, t_stack *s_t, int n)
 {
-	int	b_n;
-	int	b_dest;
+	int	t_n;
+	int	t_i;
 
-	get_b_info(*s_b, &b_n, &b_dest, n);
-	while (find_num_i(*s_b, b_n) != b_dest)
-		rrb(s_b);
-	while (find_num_i(*s_a, n) != s_a->top)
-		ra(s_a);
-	pb(s_a, s_b);
+	get_to_info(*s_t, &t_n, &t_i, n);
+	while (indx(*s_t, t_n) != t_i)
+		rotate(s_t, 1);
+	while (indx(*s_f, n) != s_f->top)
+		reverse_rotate(s_f, 1);
+	push(s_f, s_t);
 }
 
-void	rra_rb(t_stack *s_a, t_stack *s_b, int n)
+void	rrf_rt(t_stack *s_f, t_stack *s_t, int n)
 {
-	int	b_n;
-	int	b_dest;
+	int	t_n;
+	int	t_i;
 
-	get_b_info(*s_b, &b_n, &b_dest, n);
-	while (find_num_i(*s_b, b_n) != b_dest)
-		rb(s_b);
-	while (find_num_i(*s_a, n) != s_a->top)
-		rra(s_a);
-	pb(s_a, s_b);
+	get_to_info(*s_t, &t_n, &t_i, n);
+	while (indx(*s_t, t_n) != t_i)
+		reverse_rotate(s_t, 1);
+	while (indx(*s_f, n) != s_f->top)
+		rotate(s_f, 1);
+	push(s_f, s_t);
 }
 
-static void	get_b_info(t_stack s_b, int *b_n, int *b_dest, int n_a)
+static void	get_to_info(t_stack s_to, int *to_n, int *to_dest, int n_from)
 {
-	if (n_a > s_b.max)
+	if (n_from > s_to.max)
 	{
-//		ft_printf("\n%d is new max\n", n_a);
-		*b_n = s_b.max;
-		*b_dest = s_b.top;
+		*to_n = s_to.max;
+		if (s_to.code == B)
+			*to_dest = s_to.top;
+		else
+			*to_dest = 0;
 	}
-	else if (n_a < s_b.min)
+	else if (n_from < s_to.min)
 	{
-//		ft_printf("\n%d is new min\n", n_a);
-		*b_n = s_b.min;
-		*b_dest = 0;
+		*to_n = s_to.min;
+		if (s_to.code == B)
+			*to_dest = 0;
+		else
+			*to_dest = s_to.top;
 	}
 	else
 	{
-//		ft_printf("\n%d is new nothing\n", n_a);
-		*b_n = s_b.arr[n_low_i(s_b, n_a)];
-		*b_dest = s_b.top;
+		*to_n = s_to.arr[nl_indx(s_to, n_from)];
+		*to_dest = s_to.top;
 	}
 }

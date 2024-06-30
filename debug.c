@@ -3,20 +3,24 @@
 
 void print_stack(t_stack *s)
 {
+    printf("\n\n");
+    if (s->code == A)
+        printf("Stack A:\n");
+    else
+        printf("Stack B:\n");
     if (s->top < 0)
     {
         printf("Stack is empty.\n");
         return;
     }
 
-    printf("Stack contents (from bottom to top):\n");
 	printf(" Bottom -> ");
     for (int i = 0; i <= s->top; i++)
     {
         printf("%d ", s->arr[i]);
     }
 	printf(" <- Top");
-    printf("\n");
+    printf("\n\n");
 }
 
 void print_stacks(t_pusw *p)
