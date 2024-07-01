@@ -11,7 +11,7 @@ int	main(int ac, char *av[])
 		return (0);
 	if (!get_nums(ac, av, &pusw) || has_duplicates(pusw.s_a.arr, pusw.n))
 	{
-		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
 	reverse_array(pusw.s_a.arr, pusw.n);
