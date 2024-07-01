@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/01 12:56:57 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/01 14:05:36 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static void	cheapest_push(t_stack *s_f, t_stack *s_t);
@@ -17,7 +29,7 @@ void	push_swap(t_stack *s_a, t_stack *s_b)
 			cheapest_push(s_a, s_b);
 		n2top(s_b, s_b->max);
 	}
-	while(!check_order(*s_a) && s_a -> top > 0)
+	while (!check_order(*s_a) && s_a -> top > 0)
 	{
 		rotate(s_a, 1);
 		if (s_a -> arr[s_a -> top] > s_a -> arr[s_a -> top - 1])
@@ -47,7 +59,6 @@ static void	cheapest_push(t_stack *s_f, t_stack *s_t)
 {
 	int	*costs;
 	int	c_i;
-	int	c_c;
 	int	i;
 
 	costs = malloc((s_f -> top + 1) * sizeof(int));
@@ -59,19 +70,15 @@ static void	cheapest_push(t_stack *s_f, t_stack *s_t)
 	}
 	i = 0;
 	c_i = 0;
-	c_c = cheapest_cost(*s_f, *s_t, s_f -> arr[i]);
 	while (i < s_f -> top)
 	{
 		costs[i] = cheapest_cost(*s_f, *s_t, s_f -> arr[i]);
 		if (i > 0 && costs[i] < costs[c_i])
-		{
 			c_i = i;
-			c_c = costs[i];
-		}
 		i++;
 	}
+	exe_cheapest_push(s_f, s_t, s_f -> arr[c_i], costs[c_i]);
 	free(costs);
-	exe_cheapest_push(s_f, s_t, s_f -> arr[c_i], c_c);
 }
 
 static int	cheapest_cost(t_stack s_f, t_stack s_t, int n)
@@ -84,7 +91,6 @@ static int	cheapest_cost(t_stack s_f, t_stack s_t, int n)
 	costs[1] = d_rot_c(s_f, s_t, n, &rr_move);
 	costs [2] = rf_rrt_c(s_f, s_t, n);
 	costs [3] = rrf_rt_c(s_f, s_t, n);
-
 	c = costs[0];
 	i = 0;
 	while (i < 4)
@@ -96,7 +102,7 @@ static int	cheapest_cost(t_stack s_f, t_stack s_t, int n)
 	return (c);
 }
 
-static void exe_cheapest_push(t_stack *s_f, t_stack *s_t, int n, int cost)
+static void	exe_cheapest_push(t_stack *s_f, t_stack *s_t, int n, int cost)
 {
 	if (d_rot_c(*s_f, *s_t, n, &r_move) == cost)
 		d_rot(s_f, s_t, n);

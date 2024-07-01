@@ -1,4 +1,16 @@
-# include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotation_counters.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/01 13:28:26 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/01 13:32:21 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
 
 int	r_move(t_stack s, int start_i, int end_i)
 {
@@ -42,7 +54,7 @@ int	rf_rrt_c(t_stack s_f, t_stack s_t, int n)
 	else if (n < s_t.min)
 		t = rr_move(s_t, s_t.min_i, 0);
 	else
-		t = rr_move(s_t, nl_indx(s_t, n), s_t.top); // nl_indx
+		t = rr_move(s_t, nl_indx(s_t, n), s_t.top);
 	return (f + t);
 }
 
@@ -57,6 +69,6 @@ int	rrf_rt_c(t_stack s_f, t_stack s_t, int n)
 	else if (n < s_t.min)
 		t = r_move(s_t, s_t.min_i, 0);
 	else
-		t = r_move(s_t, nl_indx(s_t, n), s_t.top); // nl_indx
+		t = r_move(s_t, nl_indx(s_t, n), s_t.top);
 	return (f + t);
 }

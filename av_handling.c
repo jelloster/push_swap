@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:20:46 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/14 12:39:07 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/01 14:03:39 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ static int	get_array(int ac, char *av[], int *arr);
 
 int	get_nums(int ac, char *av[], t_pusw *pusw)
 {
-	// First argument should be at the top of the stack!!!
-	// No duplicates allowed!!
-	// Must display "Error\n" if a non integer or bigger than int is given
 	int	*nums_a;
 	int	*nums_b;
 	int	num_count;
@@ -32,21 +29,14 @@ int	get_nums(int ac, char *av[], t_pusw *pusw)
 	pusw -> n = num_count;
 	pusw -> s_a.top = num_count - 1;
 	pusw -> s_b.top = -1;
-	nums_a = malloc(num_count * sizeof(int)); // Malloc 1
+	nums_a = malloc(num_count * sizeof(int));
 	if (!nums_a)
 		exit(1);
-	nums_b = malloc(num_count * sizeof(int)); // Malloc 2
+	nums_b = malloc(num_count * sizeof(int));
 	if (!nums_b)
-	{
-		free(nums_a);
-		exit(1);
-	}
+		free_and_exit(nums_a, NULL);
 	if (!get_array(ac, av, nums_a))
-	{
-		free (nums_a);
-		free (nums_b);
-		return (0);
-	}
+		return (free_and_return(nums_a, nums_b, 0));
 	pusw -> s_a.arr = nums_a;
 	pusw -> s_b.arr = nums_b;
 	return (1);
@@ -54,33 +44,27 @@ int	get_nums(int ac, char *av[], t_pusw *pusw)
 
 static int	get_array(int ac, char *av[], int *arr)
 {
-	int		arr_i;
-	int		av_i;
+	int		a;
 	int		temp_i;
 	char	**temp;
 
-	arr_i = 0;
-	av_i = 1;
-	while (av_i <= ac - 1)
+	a = 0;
+	while (--ac > 0)
 	{
-		if (!ft_strchr(av[av_i], ' '))
+		if (!ft_strchr(*(++av), ' '))
 		{
-			arr[arr_i++] = ft_atoi(av[av_i++]);
-			if ((arr[arr_i - 1] == 0 || arr[arr_i -1] == -1)
-				&& ft_strlen(av[av_i - 1]) > 2)
-				return (0);
+			arr[a++] = ft_atoi(*av);
+			if ((arr[a - 1] == 0 || arr[a - 1] == -1) && ft_strlen(*av) > 2)
+				return (free_and_return(arr, NULL, 0));
 		}
 		else
 		{
-			temp = ft_split(av[av_i++], ' ');
+			temp = ft_split(*av, ' ');
 			if (!temp)
-			{
-				free (arr);
-				return (0);
-			}
+				free_and_exit(arr, NULL);
 			temp_i = 0;
 			while (temp[temp_i])
-				arr[arr_i++] = ft_atoi(temp[temp_i++]);
+				arr[a++] = ft_atoi(temp[temp_i++]);
 			free (temp);
 		}
 	}
@@ -97,7 +81,7 @@ static int	count_nums(int ac, char *av[])
 	while (i <= ac - 1)
 	{
 		if (!ft_strchr(av[i], ' ') && ft_isdigit_str(av[i]))
-				count++;
+			count++;
 		else if (ft_strchr(av[i], ' '))
 		{
 			if (!check_nested_nums(av[i], &count))
@@ -126,7 +110,6 @@ static int	check_nested_nums(char	*str, int *count)
 		else
 		{
 			free(temp);
-			ft_putstr_fd("Error\n", 2);
 			return (0);
 		}
 		i++;
@@ -142,6 +125,6 @@ static int	ft_isdigit_str(char	*str)
 	i = 0;
 	while (str[i])
 		if (!ft_isdigit(str[i++]))
-				return (0);
+			return (0);
 	return (1);
 }

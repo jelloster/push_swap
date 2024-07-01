@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/06/19 16:27:06 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:24:05 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	swap(t_stack *s)
 {
 	int	temp;
-	
+
 	if (s -> top < 2)
 		return ;
 	temp = s -> arr[s -> top];
@@ -45,9 +45,8 @@ void	push(t_stack *s_1, t_stack *s_2)
 {
 	if (s_1 -> top == -1)
 		return ;
-	//s_2 -> arr[++(s_2 -> top)] = s_1 -> arr[(s_1 -> top)--]; // bad ?
 	(s_2 -> top)++;
-	s_2 -> arr[s_2 -> top] = s_1 -> arr[s_1 -> top]; // null pointer ?
+	s_2 -> arr[s_2 -> top] = s_1 -> arr[s_1 -> top];
 	(s_1 -> top)--;
 	if (s_2 -> code == A)
 		ft_printf("pa\n");
@@ -103,18 +102,4 @@ void	reverse_rotate(t_stack *s, int print)
 			ft_printf("rrb\n");
 	}
 	max_n_min(s);
-}
-
-void	rr(t_stack *s_a, t_stack *s_b)
-{
-	rotate(s_a, 0);
-	rotate(s_b, 0);
-	ft_printf("rr\n");
-}
-
-void	rrr(t_stack *s_a, t_stack *s_b)
-{
-	reverse_rotate(s_a, 0);
-	reverse_rotate(s_b, 0);
-	ft_printf("rrr\n");
 }

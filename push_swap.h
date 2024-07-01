@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/01 13:31:16 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/01 13:41:56 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -8,26 +20,26 @@
 
 // --- TYPEDEFS ---
 
-typedef enum	s_code
+typedef enum s_code
 {
 	A,
 	B
 }		t_code;
 
-typedef struct	s_stack
+typedef struct s_stack
 {
-	int	top;
-	int	*arr;
-	int	max;
-	int	max_i; // used?
-	int	min;
-	int	min_i; // used?
+	int		top;
+	int		*arr;
+	int		max;
+	int		max_i;
+	int		min_i;
+	int		min;
 	t_code	code;
 }		t_stack;
 
-typedef struct	s_pusw
+typedef struct s_pusw
 {
-	t_stack s_a;
+	t_stack	s_a;
 	t_stack	s_b;
 	int		n;
 }		t_pusw;
@@ -47,11 +59,11 @@ void	rr(t_stack *s_a, t_stack *s_b);
 void	rrr(t_stack *s_a, t_stack *s_b);
 
 //	rotation_counters.c
-int	d_rot_c(t_stack s_f, t_stack s_t, int n, int (*f)(t_stack, int, int));
-int	rf_rrt_c(t_stack s_f, t_stack s_t, int n);
-int	rrf_rt_c(t_stack s_f, t_stack s_t, int n);
-int	r_move(t_stack s, int start_i, int end_i);
-int	rr_move(t_stack s, int start_i, int end_i);
+int		d_rot_c(t_stack s_f, t_stack s_t, int n, int (*f)(t_stack, int, int));
+int		rf_rrt_c(t_stack s_f, t_stack s_t, int n);
+int		rrf_rt_c(t_stack s_f, t_stack s_t, int n);
+int		r_move(t_stack s, int start_i, int end_i);
+int		rr_move(t_stack s, int start_i, int end_i);
 
 //	rotation_execution.c
 void	d_rot(t_stack *s_f, t_stack *s_t, int n);
@@ -60,18 +72,23 @@ void	rf_rrt(t_stack *s_f, t_stack *s_t, int n);
 void	rrf_rt(t_stack *s_f, t_stack *s_t, int n);
 
 //	index_functions.c
-int	indx(t_stack s, int n);
-int	nh_indx(t_stack s, int n);
-int	nl_indx(t_stack s, int n);
+int		indx(t_stack s, int n);
+int		nh_indx(t_stack s, int n);
+int		nl_indx(t_stack s, int n);
 
 //	av_handling.c
-int	get_nums(int ac, char *av[], t_pusw *pusw);
+int		get_nums(int ac, char *av[], t_pusw *pusw);
 
 //	stack_utils.c;
 void	max_n_min(t_stack *s);
 void	n2top(t_stack *s, int n);
 
+// DELETE
 void	print_stacks(t_pusw *p);
 void	print_stack(t_stack *s);
+
+// free_and_exit.c
+void	free_and_exit(int *arr1, int *arr2);
+int		free_and_return(int *arr1, int *arr2, int ret);
 
 #endif

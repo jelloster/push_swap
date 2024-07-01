@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/01 13:31:54 by motuomin          #+#    #+#             */
+/*   Updated: 2024/07/01 13:31:55 by motuomin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	max_n_min(t_stack *s)
@@ -9,9 +21,6 @@ void	max_n_min(t_stack *s)
 	i = 0;
 	s->min = s->arr[s->top];
 	s->max = s->arr[s->top];
-	s->max_i = s->top;
-	s->min_i = s->top;
-
 	while (i <= s->top)
 	{
 		if (s->arr[i] > s->max)
@@ -30,7 +39,7 @@ void	max_n_min(t_stack *s)
 
 void	n2top(t_stack *s, int n)
 {
-	int	n_i;
+	int		n_i;
 	void	(*f)(t_stack *, int);
 
 	n_i = indx(*s, n);
@@ -38,6 +47,6 @@ void	n2top(t_stack *s, int n)
 		f = &rotate;
 	else
 		f = &reverse_rotate;
-	while (s -> arr[s -> top] != n) // heap buffer overflow
+	while (s -> arr[s -> top] != n)
 		(*f)(s, 1);
 }
