@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:28:46 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 15:39:50 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/01 17:53:25 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ static void	get_to_info(t_stack s_to, int *to_n, int *to_dest, int n_from)
 	}
 	else
 	{
-		*to_n = s_to.arr[nl_indx(s_to, n_from)];
+		if (s_to.code == B)
+			*to_n = s_to.arr[nh_indx(s_to, n_from)];
+		else
+			*to_n = s_to.arr[nl_indx(s_to, n_from)];
 		*to_dest = s_to.top;
 	}
 }
