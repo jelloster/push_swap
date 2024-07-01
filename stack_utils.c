@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:31:54 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 13:31:55 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:02:22 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	max_n_min(t_stack *s)
 	i = 0;
 	s->min = s->arr[s->top];
 	s->max = s->arr[s->top];
+	s->max_i = s->top;
+	s->min_i = s->top;
 	while (i <= s->top)
 	{
 		if (s->arr[i] > s->max)

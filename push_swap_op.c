@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 13:24:05 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:39:56 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	swap(t_stack *s)
 		ft_printf("sa\n");
 	else
 		ft_printf("sb\n");
+//	print_stack(s);
 	max_n_min(s);
 }
 
@@ -52,6 +53,8 @@ void	push(t_stack *s_1, t_stack *s_2)
 		ft_printf("pa\n");
 	else
 		ft_printf("pb\n");
+//	print_stack(s_1);
+//	print_stack(s_2);
 	max_n_min(s_1);
 	max_n_min(s_2);
 }
@@ -77,6 +80,7 @@ void	rotate(t_stack *s, int print)
 		else
 			ft_printf("rb\n");
 	}
+//	print_stack(s);
 	max_n_min(s);
 }
 
@@ -101,5 +105,6 @@ void	reverse_rotate(t_stack *s, int print)
 		else
 			ft_printf("rrb\n");
 	}
+//	print_stack(s);
 	max_n_min(s);
 }

@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:56:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 14:05:36 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:53:44 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,44 @@ static int	check_order(t_stack s_a);
 
 void	push_swap(t_stack *s_a, t_stack *s_b)
 {
-	if (check_order(*s_a))
-		return ;
-	if (s_a -> top > 2)
+	if (s_a -> top > 2 && !check_order(*s_a))
 	{
 		push(s_a, s_b);
 		push(s_a, s_b);
-		while (s_a -> top > 2)
+		while (s_a -> top > 2 && !check_order(*s_a))
 			cheapest_push(s_a, s_b);
-		n2top(s_b, s_b->max);
 	}
-	while (!check_order(*s_a) && s_a -> top > 0)
+	while (!check_order(*s_a))
 	{
 		rotate(s_a, 1);
 		if (s_a -> arr[s_a -> top] > s_a -> arr[s_a -> top - 1])
 			swap(s_a);
-		n2top(s_a, s_a -> min);
 	}
 	while (s_b -> top >= 0)
 		cheapest_push(s_b, s_a);
 	n2top(s_a, s_a->min);
 }
 
-static int	check_order(t_stack s_a)
+// Checks order no matter what is on top
+static int	check_order(t_stack s)
 {
 	int	i;
+	int	strikes;
 
 	i = 0;
-	while (i <= s_a.top - 1)
+	strikes = 0;
+	while (i < s.top)
 	{
-		if (s_a.arr[i] < s_a.arr[i + 1])
-			return (0);
+		if ((s.code == A && s.arr[i] < s.arr[i + 1])
+				|| (s.code == B &&  s.arr[i] > s.arr[i + 1]))
+			strikes++;
 		i++;
 	}
+	if ((s.code == A && s.arr[s.top] < s.arr[0])
+			|| (s.code == B && s.arr[s.top] > s.arr[0]))
+		strikes++;
+	if (strikes > 1)
+		return (0);
 	return (1);
 }
 
@@ -70,10 +75,10 @@ static void	cheapest_push(t_stack *s_f, t_stack *s_t)
 	}
 	i = 0;
 	c_i = 0;
-	while (i < s_f -> top)
+	while (i <= s_f -> top)
 	{
 		costs[i] = cheapest_cost(*s_f, *s_t, s_f -> arr[i]);
-		if (i > 0 && costs[i] < costs[c_i])
+		if (i > 0 && costs[i] <= costs[c_i])
 			c_i = i;
 		i++;
 	}
