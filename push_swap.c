@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:56:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 16:53:44 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:21:27 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	push_swap(t_stack *s_a, t_stack *s_b)
 	n2top(s_a, s_a->min);
 }
 
-// Checks order no matter what is on top
 static int	check_order(t_stack s)
 {
 	int	i;
@@ -48,12 +47,12 @@ static int	check_order(t_stack s)
 	while (i < s.top)
 	{
 		if ((s.code == A && s.arr[i] < s.arr[i + 1])
-				|| (s.code == B &&  s.arr[i] > s.arr[i + 1]))
+			|| (s.code == B && s.arr[i] > s.arr[i + 1]))
 			strikes++;
 		i++;
 	}
 	if ((s.code == A && s.arr[s.top] < s.arr[0])
-			|| (s.code == B && s.arr[s.top] > s.arr[0]))
+		|| (s.code == B && s.arr[s.top] > s.arr[0]))
 		strikes++;
 	if (strikes > 1)
 		return (0);

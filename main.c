@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:53:06 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 16:56:47 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:21:06 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	main(int ac, char *av[])
 	pusw.s_b.code = B;
 	max_n_min(&pusw.s_a);
 	push_swap(&pusw.s_a, &pusw.s_b);
-//	print_stacks(&pusw);
 	free(pusw.s_a.arr);
 	free(pusw.s_b.arr);
 	return (0);

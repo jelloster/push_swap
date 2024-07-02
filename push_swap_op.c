@@ -6,16 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 16:39:56 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:18:14 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-/*
-	Swaps the first 2 elements at the top of a stack.
-	Do nothing if there are only one or no elements.
-*/
 
 void	swap(t_stack *s)
 {
@@ -30,18 +25,9 @@ void	swap(t_stack *s)
 		ft_printf("sa\n");
 	else
 		ft_printf("sb\n");
-//	print_stack(s);
 	max_n_min(s);
 }
 
-/*
-	Take the first element at the top of stack 1 and put it at the top of
-	stack 2.
-	Do nothing if 1 is empty	
-*/
-
-// pa = push(s_b, s_a);
-// pb = push(s_a, s_b);
 void	push(t_stack *s_1, t_stack *s_2)
 {
 	if (s_1 -> top == -1)
@@ -53,16 +39,9 @@ void	push(t_stack *s_1, t_stack *s_2)
 		ft_printf("pa\n");
 	else
 		ft_printf("pb\n");
-//	print_stack(s_1);
-//	print_stack(s_2);
 	max_n_min(s_1);
 	max_n_min(s_2);
 }
-
-/*
-   Shift up all elements of a stack by 1.
-   The first element becomes the last one.
-*/
 
 void	rotate(t_stack *s, int print)
 {
@@ -80,14 +59,8 @@ void	rotate(t_stack *s, int print)
 		else
 			ft_printf("rb\n");
 	}
-//	print_stack(s);
 	max_n_min(s);
 }
-
-/*
-	Shift down all elements of a stack by 1.
-	The last element becomes the first one.
-*/
 
 void	reverse_rotate(t_stack *s, int print)
 {
@@ -105,6 +78,5 @@ void	reverse_rotate(t_stack *s, int print)
 		else
 			ft_printf("rrb\n");
 	}
-//	print_stack(s);
 	max_n_min(s);
 }

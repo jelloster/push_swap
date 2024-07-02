@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:20:46 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 16:51:06 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/02 12:20:54 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	get_array(int ac, char *av[], int *arr);
 
 int	get_nums(int ac, char *av[], t_pusw *pusw)
 {
-	// rn doesn't work with neg numbers
 	int	*nums_a;
 	int	*nums_b;
 	int	num_count;
