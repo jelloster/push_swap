@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:28:46 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 17:53:25 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/07/02 11:57:38 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	rf_rrt(t_stack *s_f, t_stack *s_t, int n)
 	int	t_i;
 
 	get_to_info(*s_t, &t_n, &t_i, n);
-	while (indx(*s_t, t_n) != t_i)
-		rotate(s_t, 1);
 	while (indx(*s_f, n) != s_f->top)
-		reverse_rotate(s_f, 1);
+		rotate(s_f, 1);
+	while (indx(*s_t, t_n) != t_i)
+		reverse_rotate(s_t, 1);
 	push(s_f, s_t);
 }
 
@@ -63,10 +63,10 @@ void	rrf_rt(t_stack *s_f, t_stack *s_t, int n)
 	int	t_i;
 
 	get_to_info(*s_t, &t_n, &t_i, n);
-	while (indx(*s_t, t_n) != t_i)
-		reverse_rotate(s_t, 1);
 	while (indx(*s_f, n) != s_f->top)
-		rotate(s_f, 1);
+		reverse_rotate(s_f, 1);
+	while (indx(*s_t, t_n) != t_i)
+		rotate(s_t, 1);
 	push(s_f, s_t);
 }
 
