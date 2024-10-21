@@ -1,7 +1,24 @@
 # PushSwap
 
-Push Swap is a sorting algorithm implemented in C that efficiently sorts a stack of integers using a series of predefined operations.
+Push Swap is a sorting algorithm implemented in C that tells you how to efficiently sort a stack of integers using a series of predefined [operations](#operations). The algorithm works with two stacks, stack A and B. The unsorted integers given by the user are first placed into stack A and expected to all be returned to stack A after the sorting is completed.
 
+## The algorithm
+
+Simply put, the algoritm works by moving the numbers from stack A to stack B in (reversed) sorted order with the least amount of operations possible, and then moving the sorted integers back to stack A. It finds the "cheapest move" with simple calculations.
+
+## Installation & compilation
+
+1. Clone the repository
+``` git clone https://github.com/jelloster/push_swap.git ```
+2. Navigate to the repository and compile the program
+``` make ```
+
+## Running the program
+The program is run by giving it a series of integers as parameters. Duplicates are not allowed.
+
+Example:
+
+``` ./push_swap 5 3 2 4 1 9 7 ```
 
 ## Operations
 
