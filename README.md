@@ -1,6 +1,6 @@
-# ⏫🔀 PushSwap 🔁⏬
+# 🔀 PushSwap 🔁
 
-**PushSwap** is an efficient sorting algorithm implemented in C that sorts a stack of integers using a series of predefined [operations](https://github.com/jelloster/push_swap/edit/main/README.md#-operations-). This program outputs the sequence of operations necessary to sort the integers. 
+**PushSwap** is an efficient sorting algorithm implemented in C that sorts a stack of integers using a series of predefined [operations](https://github.com/jelloster/push_swap/tree/main?tab=readme-ov-file#-operations-). This program outputs the sequence of operations necessary to sort the integers. 
 
 The algorithm utilizes two stacks, **stack A** and **stack B**. Users input unsorted integers into stack A, and after sorting, the goal is to return all integers to stack A in sorted order.
 
