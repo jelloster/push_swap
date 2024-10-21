@@ -4,10 +4,20 @@ DEBUG_FLAGS		:=	-g
 SANITIZE_FLAGS	:=	-g -fsanitize=address
 
 CC				:=	cc
-SRC_FILES		:=	index_functions.c  main.c  push_swap.c  push_swap_op.c	\
-					rotation_counters.c  rotation_execution.c av_handling.c	\
-					stack_utils.c double_op.c free_and_exit.c
-OBJ_FILES		:=	$(SRC_FILES:.c=.o)
+SRC_FILES		:=	index_functions.c		\
+					main.c					\
+					push_swap.c				\
+					push_swap_op.c			\
+					rotation_counters.c		\
+					rotation_execution.c	\
+					av_handling.c			\
+					stack_utils.c			\
+					double_op.c				\
+					free_and_exit.c			\
+
+SRC_PATH		:= ./srcs/
+PATHED_SRC		:= $(addprefix $(SRC_PATH), $(SRC_FILES))
+OBJ_FILES		:=	$(PATHED_SRC:.c=.o)
 NAME			:=	push_swap
 LIBFT			:=	libft/libft.a
 

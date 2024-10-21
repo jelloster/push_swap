@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double_op.c                                        :+:      :+:    :+:   */
+/*   free_and_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 13:23:28 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 13:29:58 by motuomin         ###   ########.fr       */
+/*   Created: 2024/07/01 14:03:56 by motuomin          #+#    #+#             */
+/*   Updated: 2024/10/21 13:52:00 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
-void	rr(t_stack *s_a, t_stack *s_b)
+void	free_and_exit(int *arr1, int *arr2)
 {
-	rotate(s_a, 0);
-	rotate(s_b, 0);
-	ft_printf("rr\n");
+	if (arr1)
+		free (arr1);
+	if (arr2)
+		free (arr2);
+	exit (1);
 }
 
-void	rrr(t_stack *s_a, t_stack *s_b)
+int	free_and_return(int *arr1, int *arr2, int ret)
 {
-	reverse_rotate(s_a, 0);
-	reverse_rotate(s_b, 0);
-	ft_printf("rrr\n");
+	if (arr1)
+		free (arr1);
+	if (arr2)
+		free (arr2);
+	return (ret);
 }

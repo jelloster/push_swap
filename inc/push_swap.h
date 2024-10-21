@@ -6,7 +6,7 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:31:16 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 13:41:56 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:51:13 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // --- INCLUDES ---
 
-# include "libft/inc/libft.h"
+# include "../libft/inc/libft.h"
 # include <stdlib.h>
 
 // --- TYPEDEFS ---

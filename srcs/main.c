@@ -6,11 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:53:06 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/02 12:21:06 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:52:12 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static void	reverse_array(int *arr, int size);
 static int	has_duplicates(int *arr, int size);

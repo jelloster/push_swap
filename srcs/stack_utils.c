@@ -6,11 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:31:54 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/01 16:02:22 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:52:49 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	max_n_min(t_stack *s)
 {

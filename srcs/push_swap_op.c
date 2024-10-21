@@ -6,11 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:50:00 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/02 12:18:14 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:52:29 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 void	swap(t_stack *s)
 {

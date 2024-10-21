@@ -6,11 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:28:46 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/02 11:57:38 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:52:43 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static void	get_to_info(t_stack s_to, int *to_n, int *to_dest, int n_from);
 

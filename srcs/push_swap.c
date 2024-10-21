@@ -6,11 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:56:57 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/02 12:21:27 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:52:21 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static void	cheapest_push(t_stack *s_f, t_stack *s_t);
 static int	cheapest_cost(t_stack s_f, t_stack s_t, int n);

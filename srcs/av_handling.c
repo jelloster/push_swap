@@ -6,11 +6,11 @@
 /*   By: motuomin <motuomin@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:20:46 by motuomin          #+#    #+#             */
-/*   Updated: 2024/07/02 12:20:54 by motuomin         ###   ########.fr       */
+/*   Updated: 2024/10/21 13:51:34 by motuomin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../inc/push_swap.h"
 
 static int	ft_isdigit_str(char	*str);
 static int	check_nested_nums(char	*str, int *count);
