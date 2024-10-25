@@ -43,12 +43,12 @@ Push the topmost integer of stack x on top of the other stack.
 Example of push A (pa):
 
 ```
-1       1
-2 6   2 6
+1        1
+2 6    2 6
 3 5 ➔ 3 5
-4 7   4 7
-_ _   _ _
-A B   A B
+4 7    4 7
+_ _    _ _
+A B    A B
 ```
 
 ### Swap x (sa/sb) 🔁
@@ -58,12 +58,12 @@ Swap the places of the 2 topmost integers of stack x.
 Example of swap A (sa):
 
 ```
-1     2 
-2 6   1 6
+1      2 
+2 6    1 6
 3 5 ➔ 3 5
-4 7   4 7
-_ _   _ _
-A B   A B
+4 7    4 7
+_ _    _ _
+A B    A B
 ```
 
 ### Rotate x ⤴️ (ra/rb)
@@ -73,12 +73,12 @@ Rotate stack x 1 step upwards. The first element becomes the last one.
 Example of rotate A (ra):
 
 ```
-1     2 
-2 6   3 6
+1      2 
+2 6    3 6
 3 5 ➔ 4 5
-4 7   1 7
-_ _   _ _
-A B   A B
+4 7    1 7
+_ _    _ _
+A B    A B
 ```
 
 ### Reverse rotate x (rra/rrb) ⤵️
@@ -88,12 +88,12 @@ Rotate stack x 1 step downwards. The last element becomes the first one.
 Example of reverse rotate A (ra):
 
 ```
-1     4 
-2 6   1 6
+1      4 
+2 6    1 6
 3 5 ➔ 2 5
-4 7   3 7
-_ _   _ _
-A B   A B
+4 7    3 7
+_ _    _ _
+A B    A B
 ```
 
 ### Double rotate (rr) ⤴️⤴️
@@ -103,21 +103,21 @@ Rotate both stacks at the same time.
 Example of double rotate (rr):
 
 ```
-1     2 
-2 6   3 5
+1      2 
+2 6    3 5
 3 5 ➔ 4 7
-4 7   1 6
-_ _   _ _
-A B   A B
+4 7    1 6
+_ _    _ _
+A B    A B
 ```
 
 ### Double reverse rotate (rrr) ⤵️⤵️
 Example of double reverse rotate (rrr):
 ```
-1     4 
-2 6   1 7
+1      4 
+2 6    1 7
 3 5 ➔ 2 6
-4 7   3 5
-_ _   _ _
-A B   A B
+4 7    3 5
+_ _    _ _
+A B    A B
 ```
