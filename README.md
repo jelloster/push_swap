@@ -15,7 +15,7 @@ The algorithm utilizes two stacks, **stack A** and **stack B**. Users input unso
 
 ## ☆ How the algorithm works ☆
 
-In essence, the algorithm transfers numbers from stack A to stack B in reversed sorted order while minimizing the number of operations. It determines the "cheapest move" using straightforward calculations.
+The algorithm starts out by transfering (almost) all integers from stack A to stack B in a reversed sorted order. The algorithm calculates and executes the cheapest route (meaning the least operations) for each integer to go to the right place. The "cheapest move" is determined by using straightforward calculations ([rotation_counters.c](https://github.com/jelloster/push_swap/blob/main/srcs/rotation_counters.c)). The last 3 remaining integers in stack A are sorted within the stack itself, as it can be done with few moves. And finally, integers are returned from stack B to stack A in the correct order, as the order gets reversed in the transfer from one stack to another.
 
 ## ☆ Installation and compilation ☆
 
@@ -33,8 +33,6 @@ Example:
 ``` ./push_swap 5 3 2 4 1 9 7 ```
 
 ## ☆ Operations ☆
-
-The pushswap algorithm works on the basis of 2 stacks. Stack A and B. The given integers are sorted to stack A using the following predetermined operations:
 
 ### Push x (pa/pb) ⏩
 
